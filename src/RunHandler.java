@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 /**
@@ -20,21 +19,18 @@ import javafx.event.EventHandler;
  */
 
 public class RunHandler implements EventHandler<ActionEvent>  {
-
+	HorseRace horseRace;
+	
+	public RunHandler(HorseRace horseRace) {
+		this.horseRace = horseRace;
+	}
 	/*
 	 * Handles the Exit action
 	 * @parameter action = The action to handle
 	 */
 	public void handle(ActionEvent action) {
-		HorseRace horseRace = new HorseRace();
-		horseRace.populateRaceWithHorses();
-		int i = 0;
-		//for (int i = 0; i < HorseRace.NUMBER_OF_HORSES; i++) {
-		//	horseRace.startRace(i);
-		//}
-		while (!horseRace.isRaceOver()) {
+		for (int i = 0; i < HorseRace.NUMBER_OF_HORSES; i++) {
 			horseRace.startRace(i);
-			i++;
 		}
 	}
 }

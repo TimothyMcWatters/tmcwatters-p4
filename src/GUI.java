@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -31,7 +32,20 @@ import javafx.stage.Stage;
  */
 
 public class GUI extends Application {
+	private static Image image = new Image("Horse.jpg");
+	private static ArrayList<GraphicsContext> GCList = new ArrayList<GraphicsContext>();
+	
+	public static ArrayList<GraphicsContext> getGCList() {
+		return GCList;
+	}
+	
+	public static Image getImage() {
+		return image;
+	}
+	
 	public void start(Stage stage) {
+		HorseRace horseRace = new HorseRace();
+		horseRace.populateRaceWithHorses();
 		
 		// creates a GridPane for the operational buttons (run, reset, quit)
 		GridPane gridPane1 = new GridPane();
@@ -56,7 +70,7 @@ public class GUI extends Application {
 		gridPane1.add(hBoxButtons, 1, 2, 2, 1);
 		
 		//create the EventHandler association
-		RunHandler runAction = new RunHandler();
+		RunHandler runAction = new RunHandler(horseRace);
 		ResetHandler resetAction = new ResetHandler();
 		QuitHandler quitAction = new QuitHandler();
 	
@@ -66,50 +80,42 @@ public class GUI extends Application {
 		quitButton.setOnAction(quitAction);
 		
 		// Load the Image
-		Image image = new Image("Horse.jpg");
-		//Image image = new Image(new File("Horse.jpg").toURI().toString());
+		
 		
 		// Create the Canvas
 		Canvas canvas0 = new Canvas(400, 100);
+		Canvas canvas1 = new Canvas(400, 100);
+		Canvas canvas2 = new Canvas(400, 100);
+		Canvas canvas3 = new Canvas(400, 100);
+		Canvas canvas4 = new Canvas(400, 50);
+		
 		// Get the graphics context of the canvas
 		GraphicsContext gc0 = canvas0.getGraphicsContext2D();
-		// Draw the Image
-		gc0.drawImage(image, 0,0);
-		
-		// Create the Canvas
-		Canvas canvas1 = new Canvas(400, 100);
-		// Get the graphics context of the canvas
 		GraphicsContext gc1 = canvas1.getGraphicsContext2D();
-		// Draw the Image
-		gc1.drawImage(image, 0,0);
-		
-		// Create the Canvas
-		Canvas canvas2 = new Canvas(400, 100);
-		// Get the graphics context of the canvas
 		GraphicsContext gc2 = canvas2.getGraphicsContext2D();
-		// Draw the Image
-		gc2.drawImage(image, 0,0);
-		
-		// Create the Canvas
-		Canvas canvas3 = new Canvas(400, 100);
-		// Get the graphics context of the canvas
 		GraphicsContext gc3 = canvas3.getGraphicsContext2D();
-		// Draw the Image
-		gc3.drawImage(image, 0,0);
-		
-		// Create the Canvas
-		Canvas canvas4 = new Canvas(400, 50);
-		// Get the graphics context of the canvas
 		GraphicsContext gc4 = canvas4.getGraphicsContext2D();
-		// Draw the Image
-		gc4.drawImage(image, 0,0);
-				
+		
+		//populate an ArrayList of GraphicsContext
+		GCList.add(gc0);
+		GCList.add(gc1);
+		GCList.add(gc2);		
+		GCList.add(gc3);
+		GCList.add(gc4);
+		
 		//Creates rows containing canvas'
 		gridPane2.addRow(0, canvas0);
 		gridPane2.addRow(1, canvas1);
 		gridPane2.addRow(2, canvas2);
 		gridPane2.addRow(3, canvas3);
 		gridPane2.addRow(4, canvas4);
+		
+		// Draw the Image on the canvas
+		gc0.drawImage(image, 0,0);
+		gc1.drawImage(image, 0,0);
+		gc2.drawImage(image, 0,0);
+		gc3.drawImage(image, 0,0);
+		gc4.drawImage(image, 0,0);
 		
 		//sets up the boarder pane to hold the GUI items
 		BorderPane borderPane = new BorderPane();

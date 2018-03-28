@@ -34,7 +34,8 @@ public class HorseRace {
 	private ReentrantLock lock;
 
 	public HorseRace() {
-		horses = new ArrayList<Horse>();
+		this.horses = new ArrayList<Horse>();
+		this.lock = new ReentrantLock();
 	}
 	
 	public void populateRaceWithHorses() {
@@ -52,6 +53,8 @@ public class HorseRace {
 						System.out.println(!isRaceOver());
 						lock.lock();
 						horses.get(horseNumber).moveHorse();
+						GUI.getGCList().get(horseNumber).clearRect(horses.get(horseNumber).getLocationOnTrack() - 68, 0, 68, 47);
+						GUI.getGCList().get(horseNumber).drawImage(GUI.getImage(), horses.get(horseNumber).getLocationOnTrack(), 0);
 						if (horses.get(horseNumber).getLocationOnTrack() >= FINISH_LINE) {
 							Platform.runLater(() -> winnerDialog(horseNumber + 1));
 							setRaceOver(true);
@@ -97,6 +100,11 @@ public class HorseRace {
 	public void setRaceOver(boolean raceOver) {
 		this.raceOver = raceOver;
 	}
-	
 
+	/**
+	 * @return the horses
+	 */
+	public ArrayList<Horse> getHorses() {
+		return horses;
+	}
 }
