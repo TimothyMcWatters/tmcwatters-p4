@@ -33,9 +33,6 @@ import javafx.stage.Stage;
 public class GUI extends Application {
 	public void start(Stage stage) {
 		
-		//Creates an instance of the horse race to be called and ran, reset or quit later
-		HorseRace horseRace = new HorseRace();
-		
 		// creates a GridPane for the operational buttons (run, reset, quit)
 		GridPane gridPane1 = new GridPane();
 		gridPane1.setAlignment(Pos.CENTER);

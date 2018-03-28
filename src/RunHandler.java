@@ -26,6 +26,15 @@ public class RunHandler implements EventHandler<ActionEvent>  {
 	 * @parameter action = The action to handle
 	 */
 	public void handle(ActionEvent action) {
-		Platform.exit();
+		HorseRace horseRace = new HorseRace();
+		horseRace.populateRaceWithHorses();
+		int i = 0;
+		//for (int i = 0; i < HorseRace.NUMBER_OF_HORSES; i++) {
+		//	horseRace.startRace(i);
+		//}
+		while (!horseRace.isRaceOver()) {
+			horseRace.startRace(i);
+			i++;
+		}
 	}
 }
