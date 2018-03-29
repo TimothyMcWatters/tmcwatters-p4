@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -50,6 +51,7 @@ public class GUI extends Application {
 		// creates a GridPane for the operational buttons (run, reset, quit)
 		GridPane gridPane1 = new GridPane();
 		gridPane1.setAlignment(Pos.CENTER);
+		gridPane1.setPadding(new Insets(20, 0, 30, 0));
 		
 		//creates a GridPane for the horse race
 		GridPane gridPane2 = new GridPane();
@@ -83,11 +85,11 @@ public class GUI extends Application {
 		
 		
 		// Create the Canvas
-		Canvas canvas0 = new Canvas(400, 100);
-		Canvas canvas1 = new Canvas(400, 100);
-		Canvas canvas2 = new Canvas(400, 100);
-		Canvas canvas3 = new Canvas(400, 100);
-		Canvas canvas4 = new Canvas(400, 50);
+		Canvas canvas0 = new Canvas(1000, 80);
+		Canvas canvas1 = new Canvas(1000, 80);
+		Canvas canvas2 = new Canvas(1000, 80);
+		Canvas canvas3 = new Canvas(1000, 80);
+		Canvas canvas4 = new Canvas(1000, 80);
 		
 		// Get the graphics context of the canvas
 		GraphicsContext gc0 = canvas0.getGraphicsContext2D();

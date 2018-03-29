@@ -64,11 +64,4 @@ public class Horse {
 	public void setLocationOnTrack(int locationOnTrack) {
 		this.locationOnTrack = locationOnTrack;
 	}
-	
-	// Create the Canvas
-	//Canvas canvas0 = new Canvas(400, 100);
-	// Get the graphics context of the canvas
-	//GraphicsContext gc0 = canvas0.getGraphicsContext2D();
-	// Draw the Image
-	//gc0.drawImage(image, 0,0);
 }

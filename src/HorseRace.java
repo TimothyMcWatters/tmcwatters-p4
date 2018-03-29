@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
-
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -27,15 +25,17 @@ import javafx.stage.StageStyle;
 
 public class HorseRace {
 	public static final int NUMBER_OF_HORSES = 5;
-	public static final int FINISH_LINE = 400;
-	public static final int DELAY = 1000; 
+	public static final int FINISH_LINE = 1000-68;
+	public static final int DELAY = 100; 
 	private ArrayList<Horse> horses;
 	private boolean raceOver = false;
 	private ReentrantLock lock;
+	private RaceTimer timer;
 
 	public HorseRace() {
 		this.horses = new ArrayList<Horse>();
 		this.lock = new ReentrantLock();
+		this.timer = new RaceTimer();
 	}
 	
 	public void populateRaceWithHorses() {
@@ -56,6 +56,7 @@ public class HorseRace {
 						GUI.getGCList().get(horseNumber).clearRect(horses.get(horseNumber).getLocationOnTrack() - 68, 0, 68, 47);
 						GUI.getGCList().get(horseNumber).drawImage(GUI.getImage(), horses.get(horseNumber).getLocationOnTrack(), 0);
 						if (horses.get(horseNumber).getLocationOnTrack() >= FINISH_LINE) {
+							timer.stop();
 							Platform.runLater(() -> winnerDialog(horseNumber + 1));
 							setRaceOver(true);
 							Thread.currentThread().interrupt();
@@ -77,14 +78,20 @@ public class HorseRace {
 		t.start();
 	}
 
-
 	private void winnerDialog(int horseNumber) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.initStyle(StageStyle.DECORATED);
 		alert.setTitle("Announcing the winner");
 		alert.setHeaderText(null);
-		alert.setContentText("Horse number " + horseNumber + " is the winner!");
+		alert.setContentText("Horse number " + horseNumber + " is the winner!\n" + timer.toString());
 		alert.showAndWait();
+	}
+	
+	/**
+	 * @return the timer
+	 */
+	public RaceTimer getTimer() {
+		return timer;
 	}
 
 	/**
