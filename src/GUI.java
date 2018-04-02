@@ -1,6 +1,4 @@
-import java.io.File;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,17 +34,23 @@ public class GUI extends Application {
 	private static Image image = new Image("Horse.jpg");
 	private static ArrayList<GraphicsContext> GCList = new ArrayList<GraphicsContext>();
 	
+	/**
+	 * Accessor for the ArrayList
+	 * @return ArrayList of GraphicsContexts for each horse
+	 */
 	public static ArrayList<GraphicsContext> getGCList() {
 		return GCList;
 	}
 	
+	/**
+	 * 
+	 * @return image = image of the horse
+	 */
 	public static Image getImage() {
 		return image;
 	}
 	
 	public void start(Stage stage) {
-		HorseRace horseRace = new HorseRace();
-		horseRace.populateRaceWithHorses();
 		
 		// creates a GridPane for the operational buttons (run, reset, quit)
 		GridPane gridPane1 = new GridPane();
@@ -72,17 +76,14 @@ public class GUI extends Application {
 		gridPane1.add(hBoxButtons, 1, 2, 2, 1);
 		
 		//create the EventHandler association
-		RunHandler runAction = new RunHandler(horseRace);
-		ResetHandler resetAction = new ResetHandler();
+		RunHandler runAction = new RunHandler(resetButton, runButton);
+		ResetHandler resetAction = new ResetHandler(GCList, image, runButton);
 		QuitHandler quitAction = new QuitHandler();
 	
 		//set button actions
 		runButton.setOnAction(runAction);
 		resetButton.setOnAction(resetAction);
 		quitButton.setOnAction(quitAction);
-		
-		// Load the Image
-		
 		
 		// Create the Canvas
 		Canvas canvas0 = new Canvas(1000, 80);

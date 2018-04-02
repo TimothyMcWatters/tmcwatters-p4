@@ -1,6 +1,10 @@
-import javafx.application.Platform;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+
 /**
  * @author Timothy McWatters
  * @version 1.0
@@ -20,12 +24,31 @@ import javafx.event.EventHandler;
  */
 
 public class ResetHandler implements EventHandler<ActionEvent>  {
+	private ArrayList<GraphicsContext> GCList;
+	private Image image;
+	private Button runButton;
+	
+	/**
+	 * Constructor
+	 * @param GCList = Graphics Context Array List
+	 * @param image = The horse image
+	 * @param runButton = The button to start the race
+	 */
+	public ResetHandler(ArrayList<GraphicsContext> GCList, Image image, Button runButton) {
+		this.GCList = GCList;
+		this.image = image;
+		this.runButton = runButton;
+	}
 	
 	/*
-	 * Handles the Exit action
+	 * Handles the Reset race action by disabling the run button and placing the horses in starting position
 	 * @parameter action = The action to handle
 	 */
 	public void handle(ActionEvent action) {
-		Platform.exit();
+		for (GraphicsContext element : GCList) {
+			element.clearRect(0, 0, 1250, 180);
+			element.drawImage(image, 0,0);
+		}
+		runButton.setDisable(false);
 	}
 }

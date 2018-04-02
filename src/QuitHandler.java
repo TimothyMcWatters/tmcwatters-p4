@@ -21,11 +21,18 @@ import javafx.event.EventHandler;
 
 public class QuitHandler implements EventHandler<ActionEvent>  {
 	
+	/**
+	 * Constructor
+	 */
+	public QuitHandler() {
+	}
+	
 	/*
-	 * Handles the Quit action
+	 * Handles the Quit action by closing the platform, and exiting the program with an argument of 0
 	 * @parameter action = The action to handle
 	 */
 	public void handle(ActionEvent action) {
 		Platform.exit();
+		System.exit(0);
 	}
 }

@@ -1,8 +1,5 @@
 import java.util.Random;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * @author Timothy McWatters
  * @version 1.0
@@ -26,10 +23,18 @@ public class Horse {
 	private int horseNumber;
 	private int locationOnTrack = 0; 
 	
+	/**
+	 * Constructor
+	 * @param horseNumber = The number of this horse
+	 */
 	public Horse(int horseNumber) {
 		this.horseNumber = horseNumber;
 	}
 	
+	/**
+	 * Moves a horse a random distance, adds that distance to the old location on the track
+	 * and sets the new location on the track
+	 */
 	public void moveHorse() {
 		int distanceToMove = (randomGenerator.nextInt(5) + 1) * 5;
 		int oldLocationOnTrack = getLocationOnTrack();
