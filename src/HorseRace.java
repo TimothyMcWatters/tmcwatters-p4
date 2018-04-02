@@ -74,18 +74,18 @@ public class HorseRace {
 						GUI.getGCList().get(horseNumber).clearRect(horses.get(horseNumber).getLocationOnTrack() - 68, 0, 68, 47);
 						GUI.getGCList().get(horseNumber).drawImage(GUI.getImage(), horses.get(horseNumber).getLocationOnTrack(), 0);
 						if (horses.get(horseNumber).getLocationOnTrack() >= FINISH_LINE) {
+							if (!isRaceOver()) {
+								Platform.runLater(() -> announceWinner(horseNumber + 1));
+								Thread.currentThread().interrupt();
+								resetButton.setDisable(false);
+							}
 							timer.stop();
-							Platform.runLater(() -> announceWinner(horseNumber + 1));
 							setRaceOver(true);
 							Thread.currentThread().interrupt();
 							resetButton.setDisable(false);
 						}
 						lock.unlock();
 						Thread.sleep(DELAY);
-						if (isRaceOver()) {
-							Thread.currentThread().interrupt();
-							resetButton.setDisable(false);
-						}
 					}
 				    catch (InterruptedException exception) {
 				    	System.out.println("Thread terminated");
